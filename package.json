@@ -1,0 +1,30 @@
+{
+  "name": "bzplugin-gen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prettify": "prettier --write \"{scripts,src}/**/*.{js,ts,vue,scss}\"",
+    "test": "jest test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allejo/bzPlugin.js.git"
+  },
+  "author": "Vladimir \"allejo\" Jimenez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/allejo/bzPlugin.js/issues"
+  },
+  "homepage": "https://github.com/allejo/bzPlugin.js#readme",
+  "dependencies": {
+    "aclovis": "^0.1.1",
+    "typescript": "^3.2.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.10",
+    "jest": "^23.6.0",
+    "prettier": "^1.15.3",
+    "ts-jest": "^23.10.5"
+  }
+}
