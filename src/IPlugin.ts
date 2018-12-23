@@ -112,4 +112,4 @@ export default interface IPlugin {
     pollTypes: {
         [key: string]: IPollType;
     };
-};
+}

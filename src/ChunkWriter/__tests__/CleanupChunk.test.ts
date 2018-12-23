@@ -74,7 +74,7 @@ void TestClass::Cleanup()
     bz_removeCustomMapObject("customzone");
 }
         `,
-    }
+    },
 ];
 
 ITestCodeDefinitionRepeater((c, d) => new CleanupChunk(c, d), tests);

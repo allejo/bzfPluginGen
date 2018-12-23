@@ -97,7 +97,7 @@ void TestClass::Init(const char* config)
             def.addBZDBSetting({
                 name: 'myDouble',
                 type: BZDBType.Double,
-                value: 0.50,
+                value: 0.5,
             });
             def.addBZDBSetting({
                 name: 'myInt',

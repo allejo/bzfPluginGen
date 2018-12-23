@@ -7,7 +7,7 @@ import {
     CPPVariable,
     CPPVisibility,
     CPPWritable,
-    CPPWritableObject
+    CPPWritableObject,
 } from 'aclovis';
 import { ChunkWriter } from './ChunkWriter';
 
@@ -54,13 +54,10 @@ export default class CallbackChunk extends ChunkWriter {
         for (const name in this.pluginDefinition.callbacks) {
             const callback = this.pluginDefinition.callbacks[name];
 
-            callbackMatcher.defineCondition(
-                `callback == "${callback.name}"`,
-                [
-                    CPPHelper.createEmptyLine(),
-                    new CPPWritableObject('return 1;'),
-                ]
-            );
+            callbackMatcher.defineCondition(`callback == "${callback.name}"`, [
+                CPPHelper.createEmptyLine(),
+                new CPPWritableObject('return 1;'),
+            ]);
         }
 
         fxnBody.push(callbackMatcher);
