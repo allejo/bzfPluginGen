@@ -6,12 +6,12 @@ import {
     CPPFunction,
     CPPHelper,
     CPPIfBlock,
+    CPPVariable,
+    CPPVisibility,
     CPPWritable,
     CPPWritableObject,
 } from 'aclovis';
 import IPlugin from '../IPlugin';
-import CPPVisibility from 'aclovis/dist/cpp/CPPVisibility';
-import CPPVariable from 'aclovis/dist/cpp/CPPVariable';
 import { IMapObject, IMapPropertyArgument, MapArgumentType } from '../IMapObject';
 
 export default class MapObjectChunk extends ChunkWriter {
