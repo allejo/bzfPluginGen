@@ -27,7 +27,7 @@ export default class MapObjectChunk extends ChunkWriter {
         'radius',
     ];
 
-    private readonly notNeeded: boolean;
+    private readonly notNeeded: boolean = false;
 
     constructor(pluginClass: CPPClass, private readonly pluginDefinition: IPlugin) {
         super();

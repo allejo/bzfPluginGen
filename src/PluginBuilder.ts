@@ -94,14 +94,14 @@ export default class PluginBuilder {
         this.safeRemove('pollTypes', pollType, 'name');
     }
 
-    private safeRemove(namespace: string, key: Object | String | string, secondaryKey: string = null) {
-        let targetToRemove: string = null;
+    private safeRemove(namespace: string, key: { [key: string]: any } | String | string, secondaryKey: string) {
+        let targetToRemove!: string;
 
         if (typeof key === 'string') {
             targetToRemove = key;
         } else if (key instanceof String) {
             targetToRemove = key.valueOf();
-        } else if (secondaryKey != null) {
+        } else {
             targetToRemove = key[secondaryKey];
         }
 

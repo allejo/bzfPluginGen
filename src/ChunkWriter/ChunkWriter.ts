@@ -2,7 +2,7 @@ import { CPPClass, CPPFunction } from 'aclovis';
 
 export abstract class ChunkWriter {
     protected additionalClasses: CPPClass[];
-    protected fxn: CPPFunction;
+    protected fxn!: CPPFunction;
 
     protected constructor() {
         this.additionalClasses = [];

@@ -126,8 +126,8 @@ export default class InitChunk extends ChunkWriter {
 
     private registerFunctionRepeater(
         namespace: string,
-        functionCall: ((object: Object) => string) | string,
-        functionParams: (object: Object) => string[],
+        functionCall: ((object: any) => string) | string,
+        functionParams: (object: any) => string[],
         body: CPPWritable[]
     ): void {
         const objects = this.pluginDefinition[namespace];

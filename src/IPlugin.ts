@@ -8,6 +8,8 @@ import { ISlashCommand } from './ISlashCommand';
 import { IPollType } from './IPollType';
 
 export default interface IPlugin {
+    [key: string]: any;
+
     /**
      * The human-friendly name of the plug-in. This value will be converted into a C++ friendly version for the class
      * name.

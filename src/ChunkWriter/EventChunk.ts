@@ -73,12 +73,8 @@ export default class EventChunk extends ChunkWriter {
         const body: CPPWritable[] = [];
 
         if (this.pluginDefinition.codeStyle.showComments) {
-            // Trim because these descriptions may have new lines or extra whitespace
-            // Split by new lines because there may be more than one line in these descriptions
-            const description = event.description.trim().split('\n');
-
             // Only add the first line as a description
-            body.push(new CPPComment(description.shift(), false));
+            body.push(new CPPComment(event.description, false));
         }
 
         // This is a notification event, there's nothing to build

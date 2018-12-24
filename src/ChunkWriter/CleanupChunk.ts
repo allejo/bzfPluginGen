@@ -65,7 +65,7 @@ export default class CleanupChunk extends ChunkWriter {
     private unregisterFunctionRepeater(
         namespace: string,
         functionCall: string,
-        functionParams: (object: Object) => string[],
+        functionParams: (object: any) => string[],
         body: CPPWritable[]
     ): void {
         const objects = this.pluginDefinition[namespace];
