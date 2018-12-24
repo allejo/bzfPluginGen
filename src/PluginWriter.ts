@@ -32,7 +32,7 @@ export default class PluginWriter {
         let { codeStyle } = this.plugin;
         let formatter = new CPPFormatter({
             bracesOnNewLine: codeStyle.bracesOnNewLine,
-            indentWithSpaces: codeStyle.spacingType === 'tabs',
+            indentWithSpaces: codeStyle.spacingType !== 'tabs',
             indentSpaceCount: codeStyle.spacingType === 'twoSpace' ? 2 : 4,
         });
 
