@@ -6,6 +6,7 @@ import CleanupChunk from './ChunkWriter/CleanupChunk';
 import CallbackChunk from './ChunkWriter/CallbackChunk';
 import EventChunk from './ChunkWriter/EventChunk';
 import SlashCommandChunk from './ChunkWriter/SlashCommandChunk';
+import MapObjectChunk from './ChunkWriter/MapObjectChunk';
 
 export default class PluginWriter {
     private readonly pluginClass: CPPClass;
@@ -64,5 +65,8 @@ export default class PluginWriter {
         callbackChunk.process();
     }
 
-    private handleMapObjects() {}
+    private handleMapObjects() {
+        const mapObjectChunk = new MapObjectChunk(this.pluginClass, this.plugin);
+        mapObjectChunk.process();
+    }
 }
