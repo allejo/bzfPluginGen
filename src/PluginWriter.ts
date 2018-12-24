@@ -24,6 +24,10 @@ export default class PluginWriter {
         this.handleMapObjects();
     }
 
+    getClassName(): string {
+        return this.pluginClass.getClassName();
+    }
+
     write(): string {
         let { codeStyle } = this.plugin;
         let formatter = new CPPFormatter({
