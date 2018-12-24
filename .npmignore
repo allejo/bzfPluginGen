@@ -1,0 +1,8 @@
+.editorconfig
+.idea/
+.prettierrc
+.travis.yml
+.vscode/
+__tests__
+src/
+tsconfig.json

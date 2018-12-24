@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./dist/",
-    "sourceMap": true,
+    "sourceMap": false,
     "strict": true,
     "module": "es2015",
     "moduleResolution": "node",
@@ -10,12 +10,13 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "preserveConstEnums": true,
-    "declaration": false,
+    "declaration": true,
     "stripInternal": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true
   },
   "include": [
+    "./index.ts",
     "./src/**/*"
   ]
 }

@@ -2,8 +2,9 @@
   "name": "bzf-plugin-gen",
   "version": "1.0.0",
   "description": "The core logic for generating C++ plug-in source from JSON",
-  "main": "index.ts",
+  "main": "dist/index.js",
   "scripts": {
+    "build": "tsc -p ./",
     "prettify": "prettier --write \"src/**/*.{js,ts}\" --write \"*.{js,ts}\"",
     "test": "jest test"
   },
