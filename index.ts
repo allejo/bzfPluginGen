@@ -15,7 +15,7 @@ import MapObjectChunk from './src/ChunkWriter/MapObjectChunk';
 import NameChunk from './src/ChunkWriter/NameChunk';
 import SlashCommandChunk from './src/ChunkWriter/SlashCommandChunk';
 
-import IPlugin from './src/IPlugin';
+import IPlugin, { IAuthor, ICodeStyle } from './src/IPlugin';
 import PluginBuilder from './src/PluginBuilder';
 import PluginWriter from './src/PluginWriter';
 
@@ -30,8 +30,10 @@ export {
 
     BZDBType,
     FlagType,
+    IAuthor,
     IBZDBSetting,
     ICallback,
+    ICodeStyle,
     IEvent,
     IFlag,
     ILicense,
