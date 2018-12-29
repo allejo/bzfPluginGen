@@ -28,15 +28,18 @@ export default class PluginWriter {
         return this.pluginClass.getClassName();
     }
 
-    write(): string {
-        let { codeStyle } = this.plugin;
-        let formatter = new CPPFormatter({
+    getFormatter(): CPPFormatter {
+        const { codeStyle } = this.plugin;
+
+        return new CPPFormatter({
             bracesOnNewLine: codeStyle.bracesOnNewLine,
             indentWithSpaces: codeStyle.spacingType !== 'tabs',
             indentSpaceCount: codeStyle.spacingType === 'twoSpace' ? 2 : 4,
         });
+    }
 
-        return this.pluginClass.write(formatter, 0);
+    write(): string {
+        return this.pluginClass.write(this.getFormatter(), 0);
     }
 
     private handleNameMethod() {
