@@ -1,5 +1,5 @@
 {
-  "name": "bzf-plugin-gen",
+  "name": "@allejo/bzf-plugin-gen",
   "version": "1.0.0",
   "description": "The core logic for generating C++ plug-in source from JSON",
   "main": "dist/index.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/allejo/bzPlugin.js.git"
+    "url": "git+https://github.com/allejo/bzfPluginGen.git"
   },
   "author": "Vladimir \"allejo\" Jimenez",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/allejo/bzPlugin.js/issues"
+    "url": "https://github.com/allejo/bzfPluginGen/issues"
   },
-  "homepage": "https://github.com/allejo/bzPlugin.js#readme",
+  "homepage": "https://github.com/allejo/bzfPluginGen#readme",
   "dependencies": {
     "aclovis": "^0.1.1"
   },
