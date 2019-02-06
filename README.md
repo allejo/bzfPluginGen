@@ -13,6 +13,12 @@ The library has the [`PluginBuilder`](./src/PluginBuilder.ts) and [`PluginWriter
 - The `PluginBuilder` is a helper class that will help you build the `IPlugin` interface programmatically and correctly.
 - The `PluginWriter` class takes an `IPlugin` object and provides a `write()` method to output the generated C++ code.
 
+### Running `sample.ts`
+
+```
+node_modules/.bin/ts-node -O '{"module": "commonjs"}' sample.ts
+```
+
 ## License
 
 [MIT](./LICENSE.md)
