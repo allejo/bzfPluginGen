@@ -96,7 +96,7 @@ export default class InitChunk extends ChunkWriter {
         this.registerFunctionRepeater(
             'mapObjects',
             'bz_registerCustomMapObject',
-            (object: IMapObject) => [`"${object.name}"`, 'this'],
+            (object: IMapObject) => [`"${object.name.toUpperCase()}"`, 'this'],
             body
         );
     }

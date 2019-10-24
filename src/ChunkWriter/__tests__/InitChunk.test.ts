@@ -139,6 +139,22 @@ void TestClass::Init(const char* config)
 }
         `,
     },
+    {
+        desc: 'Init() should register custom map objects',
+        setup: (def: PluginBuilder) => {
+            def.addMapObject({
+                name: 'jail',
+                uuid: '',
+                properties: [],
+            });
+        },
+        expected: `
+void TestClass::Init(const char* config)
+{
+    bz_registerCustomMapObject("JAIL", this);
+}
+        `,
+    },
 ];
 
 ITestCodeDefinitionRepeater((c, d) => new InitChunk(c, d), tests);
