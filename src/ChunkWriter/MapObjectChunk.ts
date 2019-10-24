@@ -15,7 +15,7 @@ import IPlugin from '../IPlugin';
 import { IMapObject, IMapPropertyArgument, MapArgumentType } from '../IMapObject';
 
 export default class MapObjectChunk extends ChunkWriter {
-    static propertyBlacklist = [
+    static readonly propertyBlacklist = [
         'position|pos',
         'position',
         'pos',
@@ -124,9 +124,11 @@ export default class MapObjectChunk extends ChunkWriter {
             return;
         }
 
+        const normLine = `normalizedLine`;
+        const rawLine = `line`;
+
         const propertyLoop = new CPPCodeBlock('for (unsigned int i = 0; i < data->data.size(); i++)', [
-            new CPPVariable('std::string', 'line', 'data->data.get(i)'),
-            CPPHelper.createEmptyLine(),
+            new CPPVariable('std::string', rawLine, 'data->data.get(i)'),
         ]);
 
         const simpleProperties = new CPPIfBlock();
@@ -139,14 +141,14 @@ export default class MapObjectChunk extends ChunkWriter {
                 continue;
             }
 
-            const isSimpleProp = mapProperty.arguments.length === 0;
+            const isFlagProp = mapProperty.arguments.length === 0;
 
-            if (isSimpleProp) {
+            if (isFlagProp) {
                 const cppVar = MapObjectChunk.createCppVarFromArgument(mapProperty.name);
 
                 classObj.addVariable(cppVar, CPPVisibility.Public);
 
-                simpleProperties.defineCondition(`line == "${mapProperty.name}"`, [
+                simpleProperties.defineCondition(`${normLine} == "${mapProperty.name.toUpperCase()}"`, [
                     new CPPWritableObject(`${insVar}.${cppVar.getVariableName()} = true;`),
                     new CPPWritableObject('continue;'),
                 ]);
@@ -168,6 +170,11 @@ export default class MapObjectChunk extends ChunkWriter {
             complexProperties.defineCondition(`key == "${mapProperty.name}"`, casters);
         }
 
+        if (Object.keys(simpleProperties.conditions).length > 0) {
+            propertyLoop.body.push(new CPPVariable('std::string', normLine, `bz_toupper(${rawLine})`));
+        }
+
+        propertyLoop.body.push(CPPHelper.createEmptyLine());
         propertyLoop.body.push(simpleProperties);
 
         if (Object.keys(complexProperties.conditions).length > 0) {
@@ -182,7 +189,7 @@ export default class MapObjectChunk extends ChunkWriter {
                 ...[
                     CPPHelper.createEmptyLine(),
                     new CPPVariable('bz_APIStringList', 'nubs'),
-                    new CPPWritableObject('nubs.tokenize(line.c_str(), " ", 0, true);'),
+                    new CPPWritableObject(`nubs.tokenize(${rawLine}.c_str(), " ", 0, true);`),
                     CPPHelper.createEmptyLine(),
                     complexProperty,
                 ]
