@@ -206,6 +206,75 @@ bool TestClass::MapObject(bz_ApiString object, bz_CustomMapObjectInfo* data)
 }
         `,
     },
+    {
+        desc: 'Add casting options and flag attributes combined',
+        setup: (def: PluginBuilder) => {
+            def.addMapObject({
+                uuid: '',
+                name: 'ahod',
+                properties: [
+                    {
+                        uuid: '',
+                        name: 'message',
+                        readonly: false,
+                        arguments: [
+                            {
+                                uuid: '',
+                                name: 'value',
+                                type: MapArgumentType.String,
+                            },
+                        ],
+                    },
+                    {
+                        uuid: '',
+                        name: 'rogueonly',
+                        readonly: false,
+                        arguments: [],
+                    },
+                ],
+            });
+        },
+        expected: `
+bool TestClass::MapObject(bz_ApiString object, bz_CustomMapObjectInfo* data)
+{
+    // Note, this value will be in uppercase
+    if (!data || object != "AHOD")
+    {
+        return false;
+    }
+
+    AhodZone ahodZone;
+    ahodZone.handleDefaultOptions(data);
+
+    for (unsigned int i = 0; i < data->data.size(); i++)
+    {
+        std::string line = data->data.get(i);
+        std::string normalizedLine = bz_toupper(line);
+
+        if (normalizedLine == "ROGUEONLY")
+        {
+            ahodZone.rogueonly = true;
+            continue;
+        }
+
+        bz_APIStringList nubs;
+        nubs.tokenize(line.c_str(), " ", 0, true);
+
+        if (nubs.size() > 0)
+        {
+            std::string key = bz_toupper(nubs.get(0).c_str());
+
+            if (key == "MESSAGE")
+            {
+                ahodZone.message_value = nubs.get(1).c_str();
+            }
+        }
+    }
+
+    return true;
+}
+        `,
+    },
 ];
 
 ITestCodeDefinitionRepeater((c, d) => new MapObjectChunk(c, d), tests);
