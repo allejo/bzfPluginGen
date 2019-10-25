@@ -167,15 +167,14 @@ export default class MapObjectChunk extends ChunkWriter {
                 casters.push(MapObjectChunk.createCppCastForArgument(insVar, cppVar, j + 1, argument));
             }
 
-            complexProperties.defineCondition(`key == "${mapProperty.name}"`, casters);
+            complexProperties.defineCondition(`key == "${mapProperty.name.toUpperCase()}"`, casters);
         }
 
         if (Object.keys(simpleProperties.conditions).length > 0) {
             propertyLoop.body.push(new CPPVariable('std::string', normLine, `bz_toupper(${rawLine})`));
+            propertyLoop.body.push(CPPHelper.createEmptyLine());
+            propertyLoop.body.push(simpleProperties);
         }
-
-        propertyLoop.body.push(CPPHelper.createEmptyLine());
-        propertyLoop.body.push(simpleProperties);
 
         if (Object.keys(complexProperties.conditions).length > 0) {
             const complexProperty = new CPPIfBlock();
