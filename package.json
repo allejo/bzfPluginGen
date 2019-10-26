@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc -p ./",
+    "coverage": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "prettify": "prettier --write \"src/**/*.{js,ts}\" --write \"*.{js,ts}\"",
     "test": "jest test"
   },
@@ -22,11 +23,12 @@
     "aclovis": "^0.1.1"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.10",
+    "@types/jest": "^23.3.14",
+    "coveralls": "^3.0.7",
     "jest": "^23.6.0",
-    "prettier": "^1.15.3",
+    "prettier": "^1.18.2",
     "ts-jest": "^23.10.5",
     "ts-node": "^7.0.1",
-    "typescript": "^3.2.2"
+    "typescript": "^3.6.4"
   }
 }

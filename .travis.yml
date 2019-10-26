@@ -1,10 +1,13 @@
 sudo: false
 
 language: node_js
-dist: trusty
 node_js:
-    - 10
-    - 8
+    - "12"
+    - "10"
+    - "8"
+
+script:
+    - npm run coverage
 
 notifications:
     email: false
