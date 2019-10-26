@@ -393,7 +393,8 @@ bool TestClass::MapObject(bz_ApiString object, bz_CustomMapObjectInfo* data)
     return true;
 }
         `,
-    },{
+    },
+    {
         desc: 'Skip blacklisted or empty property names',
         setup: (def: PluginBuilder) => {
             def.addMapObject({
@@ -419,7 +420,7 @@ bool TestClass::MapObject(bz_ApiString object, bz_CustomMapObjectInfo* data)
                                 uuid: '',
                                 name: 'z',
                                 type: MapArgumentType.Double,
-                            }
+                            },
                         ],
                     },
                     {

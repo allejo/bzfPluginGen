@@ -15,15 +15,7 @@ import IPlugin from '../IPlugin';
 import { IMapObject, IMapPropertyArgument, MapArgumentType } from '../IMapObject';
 
 export default class MapObjectChunk extends ChunkWriter {
-    static readonly propertyBlacklist = [
-        'position',
-        'pos',
-        'size',
-        'rotation',
-        'rot',
-        'height',
-        'radius',
-    ];
+    static readonly propertyBlacklist = ['position', 'pos', 'size', 'rotation', 'rot', 'height', 'radius'];
 
     private readonly notNeeded: boolean = false;
 
@@ -150,9 +142,10 @@ export default class MapObjectChunk extends ChunkWriter {
 
                 classObj.addVariable(cppVar, CPPVisibility.Public);
 
-                const condition = this.buildPropertyKeyAliases(propertyNames, (property: string) => (
-                    `${normLine} == "${property.toUpperCase()}"`
-                ));
+                const condition = this.buildPropertyKeyAliases(
+                    propertyNames,
+                    (property: string) => `${normLine} == "${property.toUpperCase()}"`
+                );
 
                 if (condition === null) {
                     continue;
@@ -178,9 +171,10 @@ export default class MapObjectChunk extends ChunkWriter {
             }
 
             const propertyNames = mapProperty.name.split('|');
-            const condition = this.buildPropertyKeyAliases(propertyNames, (property: string) => (
-                `key == "${property.toUpperCase()}"`
-            ));
+            const condition = this.buildPropertyKeyAliases(
+                propertyNames,
+                (property: string) => `key == "${property.toUpperCase()}"`
+            );
 
             if (condition === null) {
                 continue;
@@ -241,8 +235,7 @@ export default class MapObjectChunk extends ChunkWriter {
 
         if (conditions.length > 1) {
             return `(${conditions.join(') || (')})`;
-        }
-        else if (conditions.length == 1) {
+        } else if (conditions.length == 1) {
             return conditions[0];
         }
 
