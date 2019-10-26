@@ -1,12 +1,13 @@
 {
   "name": "@allejo/bzf-plugin-gen",
-  "version": "1.0.0",
+  "version": "1.0.0-rc.1",
   "description": "The core logic for generating C++ plug-in source from JSON",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc -p ./",
     "coverage": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "prettify": "prettier --write \"src/**/*.{js,ts}\" --write \"*.{js,ts}\"",
+    "prepare": "npm run build",
     "test": "jest test"
   },
   "repository": {

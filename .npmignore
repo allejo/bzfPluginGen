@@ -3,6 +3,13 @@
 .prettierrc
 .travis.yml
 .vscode/
+
 __tests__
+coverage/
 src/
+
+index.ts
+jest.config.js
 tsconfig.json
+
+*.tgz
