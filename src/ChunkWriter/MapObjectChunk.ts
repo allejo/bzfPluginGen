@@ -1,4 +1,3 @@
-import { ChunkWriter } from './ChunkWriter';
 import {
     CPPClass,
     CPPCodeBlock,
@@ -11,8 +10,10 @@ import {
     CPPWritable,
     CPPWritableObject,
 } from 'aclovis';
-import IPlugin from '../IPlugin';
 import { IMapObject, IMapPropertyArgument, MapArgumentType } from '../IMapObject';
+
+import { ChunkWriter } from './ChunkWriter';
+import IPlugin from '../IPlugin';
 
 export default class MapObjectChunk extends ChunkWriter {
     static readonly propertyBlacklist = ['position', 'pos', 'size', 'rotation', 'rot', 'height', 'radius'];

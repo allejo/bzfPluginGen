@@ -1,4 +1,3 @@
-import IPlugin from '../IPlugin';
 import {
     CPPClass,
     CPPComment,
@@ -10,8 +9,10 @@ import {
     CPPVisibility,
     CPPWritable,
 } from 'aclovis';
+
 import { ChunkWriter } from './ChunkWriter';
 import { IEvent } from '../IEvent';
+import IPlugin from '../IPlugin';
 
 export default class EventChunk extends ChunkWriter {
     constructor(pluginClass: CPPClass, private readonly pluginDefinition: IPlugin) {

@@ -19,14 +19,23 @@
     "url": "https://github.com/allejo/bzfPluginGen/issues"
   },
   "homepage": "https://github.com/allejo/bzfPluginGen#readme",
+  "importSort": {
+    ".js, .ts": {
+      "parser": "typescript",
+      "style": "eslint"
+    }
+  },
   "dependencies": {
     "aclovis": "^0.1.1"
   },
   "devDependencies": {
     "@types/jest": "^23.3.14",
     "coveralls": "^3.0.7",
+    "import-sort": "^6.0.0",
+    "import-sort-style-eslint": "^6.0.0",
     "jest": "^23.6.0",
     "prettier": "^1.18.2",
+    "prettier-plugin-import-sort": "^0.0.3",
     "ts-jest": "^23.10.5",
     "ts-node": "^7.0.1",
     "typescript": "^3.6.4"

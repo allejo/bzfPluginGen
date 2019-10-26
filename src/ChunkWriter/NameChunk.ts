@@ -1,6 +1,7 @@
-import IPlugin from '../IPlugin';
 import { CPPClass, CPPFunction, CPPVisibility, CPPWritableObject } from 'aclovis';
+
 import { ChunkWriter } from './ChunkWriter';
+import IPlugin from '../IPlugin';
 
 export default class NameChunk extends ChunkWriter {
     constructor(pluginClass: CPPClass, private readonly pluginDefinition: IPlugin) {

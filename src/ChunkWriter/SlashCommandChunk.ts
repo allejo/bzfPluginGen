@@ -1,6 +1,7 @@
-import IPlugin from '../IPlugin';
-import { ChunkWriter } from './ChunkWriter';
 import { CPPClass, CPPFunction, CPPHelper, CPPIfBlock, CPPVariable, CPPVisibility, CPPWritableObject } from 'aclovis';
+
+import { ChunkWriter } from './ChunkWriter';
+import IPlugin from '../IPlugin';
 
 export default class SlashCommandChunk extends ChunkWriter {
     private readonly notNeeded: boolean = false;

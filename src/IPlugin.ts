@@ -1,11 +1,11 @@
 import { IBZDBSetting } from './IBZDBSetting';
 import { ICallback } from './ICallback';
-import { IFlag } from './IFlag';
 import { IEvent } from './IEvent';
+import { IFlag } from './IFlag';
 import { ILicense } from './ILicense';
 import { IMapObject } from './IMapObject';
-import { ISlashCommand } from './ISlashCommand';
 import { IPollType } from './IPollType';
+import { ISlashCommand } from './ISlashCommand';
 
 export interface IAuthor {
     [key: string]: any;

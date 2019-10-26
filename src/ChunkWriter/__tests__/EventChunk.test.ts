@@ -1,4 +1,5 @@
 import { ITestCodeDefinition, ITestCodeDefinitionRepeater } from '../../__tests__/utilities';
+
 import EventChunk from '../EventChunk';
 import PluginBuilder from '../../PluginBuilder';
 

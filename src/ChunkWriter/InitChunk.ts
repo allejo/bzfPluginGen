@@ -1,11 +1,12 @@
-import IPlugin from '../IPlugin';
-import { CPPClass, CPPComment, CPPFunction, CPPHelper, CPPVariable, CPPVisibility, CPPWritable } from 'aclovis';
-import { ChunkWriter } from './ChunkWriter';
-import { ISlashCommand } from '../ISlashCommand';
-import { IEvent } from '../IEvent';
 import { BZDBType, IBZDBSetting } from '../IBZDBSetting';
+import { CPPClass, CPPComment, CPPFunction, CPPHelper, CPPVariable, CPPVisibility, CPPWritable } from 'aclovis';
+
+import { ChunkWriter } from './ChunkWriter';
+import { IEvent } from '../IEvent';
 import { IFlag } from '../IFlag';
 import { IMapObject } from '../IMapObject';
+import IPlugin from '../IPlugin';
+import { ISlashCommand } from '../ISlashCommand';
 
 export default class InitChunk extends ChunkWriter {
     constructor(private readonly pluginClass: CPPClass, private readonly pluginDefinition: IPlugin) {

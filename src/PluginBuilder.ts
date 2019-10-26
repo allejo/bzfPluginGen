@@ -1,12 +1,12 @@
-import IPlugin from './IPlugin';
 import { IBZDBSetting } from './IBZDBSetting';
 import { ICallback } from './ICallback';
 import { IEvent } from './IEvent';
 import { IFlag } from './IFlag';
 import { IMapObject } from './IMapObject';
+import IPlugin from './IPlugin';
+import { IPollType } from './IPollType';
 import { ISlashCommand } from './ISlashCommand';
 import { NullLicense } from './ILicense';
-import { IPollType } from './IPollType';
 
 export default class PluginBuilder {
     public definition: IPlugin;

@@ -1,12 +1,13 @@
-import IPlugin from './IPlugin';
 import { CPPClass, CPPFormatter, CPPVisibility } from 'aclovis';
-import NameChunk from './ChunkWriter/NameChunk';
-import InitChunk from './ChunkWriter/InitChunk';
-import CleanupChunk from './ChunkWriter/CleanupChunk';
+
 import CallbackChunk from './ChunkWriter/CallbackChunk';
+import CleanupChunk from './ChunkWriter/CleanupChunk';
 import EventChunk from './ChunkWriter/EventChunk';
-import SlashCommandChunk from './ChunkWriter/SlashCommandChunk';
+import IPlugin from './IPlugin';
+import InitChunk from './ChunkWriter/InitChunk';
 import MapObjectChunk from './ChunkWriter/MapObjectChunk';
+import NameChunk from './ChunkWriter/NameChunk';
+import SlashCommandChunk from './ChunkWriter/SlashCommandChunk';
 
 export default class PluginWriter {
     private readonly pluginClass: CPPClass;

@@ -1,4 +1,3 @@
-import IPlugin from '../IPlugin';
 import {
     CPPClass,
     CPPFunction,
@@ -9,7 +8,9 @@ import {
     CPPWritable,
     CPPWritableObject,
 } from 'aclovis';
+
 import { ChunkWriter } from './ChunkWriter';
+import IPlugin from '../IPlugin';
 
 export default class CallbackChunk extends ChunkWriter {
     private readonly notNeeded: boolean = false;

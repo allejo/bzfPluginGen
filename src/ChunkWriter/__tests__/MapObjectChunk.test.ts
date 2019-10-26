@@ -1,8 +1,9 @@
+import { ITestCodeDefinition, ITestCodeDefinitionRepeater } from '../../__tests__/utilities';
+
 import { CPPClass } from 'aclovis';
+import { MapArgumentType } from '../../IMapObject';
 import MapObjectChunk from '../MapObjectChunk';
 import PluginBuilder from '../../PluginBuilder';
-import { ITestCodeDefinition, ITestCodeDefinitionRepeater } from '../../__tests__/utilities';
-import { MapArgumentType } from '../../IMapObject';
 
 const tests: ITestCodeDefinition[] = [
     {

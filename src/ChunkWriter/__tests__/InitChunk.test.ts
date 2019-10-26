@@ -1,9 +1,10 @@
-import InitChunk from '../InitChunk';
-import PluginBuilder from '../../PluginBuilder';
 import { ITestCodeDefinition, ITestCodeDefinitionRepeater } from '../../__tests__/utilities';
-import { getIEventMock } from '../../__tests__/mocks/IEventMock';
+
 import { BZDBType } from '../../IBZDBSetting';
 import { FlagType } from '../../IFlag';
+import InitChunk from '../InitChunk';
+import PluginBuilder from '../../PluginBuilder';
+import { getIEventMock } from '../../__tests__/mocks/IEventMock';
 
 const tests: ITestCodeDefinition[] = [
     {

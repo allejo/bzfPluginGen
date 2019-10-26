@@ -1,8 +1,9 @@
+import { ITestCodeDefinition, ITestCodeDefinitionRepeater } from '../../__tests__/utilities';
+
+import { BZDBType } from '../../IBZDBSetting';
+import { CPPClass } from 'aclovis';
 import CleanupChunk from '../CleanupChunk';
 import PluginBuilder from '../../PluginBuilder';
-import { CPPClass } from 'aclovis';
-import { ITestCodeDefinition, ITestCodeDefinitionRepeater } from '../../__tests__/utilities';
-import { BZDBType } from '../../IBZDBSetting';
 
 const tests: ITestCodeDefinition[] = [
     {
@@ -94,7 +95,7 @@ void TestClass::Cleanup()
             });
             def.addPollType({
                 name: 'mapchange',
-            })
+            });
         },
         expected: `
 void TestClass::Cleanup()

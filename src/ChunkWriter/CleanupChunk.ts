@@ -1,10 +1,11 @@
-import IPlugin from '../IPlugin';
 import { CPPClass, CPPFunction, CPPHelper, CPPVisibility, CPPWritable, CPPWritableObject } from 'aclovis';
+
 import { ChunkWriter } from './ChunkWriter';
-import { IMapObject } from '../IMapObject';
-import { ISlashCommand } from '../ISlashCommand';
 import { IBZDBSetting } from '../IBZDBSetting';
+import { IMapObject } from '../IMapObject';
+import IPlugin from '../IPlugin';
 import { IPollType } from '../IPollType';
+import { ISlashCommand } from '../ISlashCommand';
 
 export default class CleanupChunk extends ChunkWriter {
     constructor(pluginClass: CPPClass, private readonly pluginDefinition: IPlugin) {

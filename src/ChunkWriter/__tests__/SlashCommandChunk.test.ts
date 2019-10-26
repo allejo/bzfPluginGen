@@ -1,4 +1,5 @@
 import { ITestCodeDefinition, ITestCodeDefinitionRepeater } from '../../__tests__/utilities';
+
 import PluginBuilder from '../../PluginBuilder';
 import SlashCommandChunk from '../SlashCommandChunk';
 
@@ -7,11 +8,11 @@ const tests: ITestCodeDefinition[] = [
         desc: 'should output an event with data parameters in a switch statement',
         setup: (def: PluginBuilder) => {
             def.addSlashCommand({
-                name: 'killall'
+                name: 'killall',
             });
 
             def.addSlashCommand({
-                name: 'ban'
+                name: 'ban',
             });
         },
         expected: `

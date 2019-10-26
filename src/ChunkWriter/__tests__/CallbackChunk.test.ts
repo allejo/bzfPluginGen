@@ -1,6 +1,7 @@
 import { ITestCodeDefinition, ITestCodeDefinitionRepeater } from '../../__tests__/utilities';
-import PluginBuilder from '../../PluginBuilder';
+
 import CallbackChunk from '../CallbackChunk';
+import PluginBuilder from '../../PluginBuilder';
 
 const tests: ITestCodeDefinition[] = [
     {
