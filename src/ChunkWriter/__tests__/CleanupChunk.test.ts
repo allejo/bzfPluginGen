@@ -2,6 +2,7 @@ import CleanupChunk from '../CleanupChunk';
 import PluginBuilder from '../../PluginBuilder';
 import { CPPClass } from 'aclovis';
 import { ITestCodeDefinition, ITestCodeDefinitionRepeater } from '../../__tests__/utilities';
+import { BZDBType } from '../../IBZDBSetting';
 
 const tests: ITestCodeDefinition[] = [
     {
@@ -72,6 +73,41 @@ void TestClass::Cleanup()
     bz_removeCustomSlashCommand("command");
 
     bz_removeCustomMapObject("customzone");
+}
+        `,
+    },
+    {
+        desc: 'render method with Flush() and all removal types',
+        setup: (def: PluginBuilder) => {
+            def.addSlashCommand({
+                name: 'command',
+            });
+            def.addMapObject({
+                uuid: '',
+                name: 'customzone',
+                properties: [],
+            });
+            def.addBZDBSetting({
+                name: '_setting',
+                type: BZDBType.Int,
+                value: 0,
+            });
+            def.addPollType({
+                name: 'mapchange',
+            })
+        },
+        expected: `
+void TestClass::Cleanup()
+{
+    Flush();
+
+    bz_removeCustomSlashCommand("command");
+
+    bz_removeCustomMapObject("customzone");
+
+    bz_removeCustomBZDBVariable("_setting");
+
+    bz_removeCustomPollType("mapchange");
 }
         `,
     },
