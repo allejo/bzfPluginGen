@@ -83,14 +83,12 @@ export default class EventChunk extends ChunkWriter {
         }
 
         // The pointer to this event's data
-        body.push(new CPPVariable(event.dataType, '*data', `(${event.dataType}*)eventData`));
+        body.push(new CPPVariable(`${event.dataType}*`, 'data', `(${event.dataType}*)eventData`));
 
         // Doc blocks have been disabled, so don't render anything else
         if (!this.pluginDefinition.codeStyle.showDocBlocks) {
             return body;
         }
-
-        body.push(CPPHelper.createEmptyLine());
 
         let docBlock: string[] = [];
         docBlock.push('Data');
@@ -108,7 +106,10 @@ export default class EventChunk extends ChunkWriter {
             docBlock.push(`${dataType} ${varName} - ${value.description}`);
         }
 
-        body.push(new CPPComment(docBlock, false));
+        if (event.parameters.length > 0) {
+            body.push(CPPHelper.createEmptyLine());
+            body.push(new CPPComment(docBlock, false));
+        }
 
         return body;
     }
