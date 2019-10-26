@@ -56,6 +56,8 @@ export default class MapObjectChunk extends ChunkWriter {
         this.buildParsers(fxnBody);
 
         fxnBody.push(CPPHelper.createEmptyLine());
+        fxnBody.push(new CPPComment('@TODO Save your custom map objects to your class', false));
+        fxnBody.push(CPPHelper.createEmptyLine());
         fxnBody.push(new CPPWritableObject('return true;'));
 
         this.fxn.implementFunction(fxnBody);

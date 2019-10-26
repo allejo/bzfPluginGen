@@ -26,6 +26,8 @@ bool TestClass::MapObject(bz_ApiString object, bz_CustomMapObjectInfo* data)
     AhodZone ahodZone;
     ahodZone.handleDefaultOptions(data);
 
+    // @TODO Save your custom map objects to your class
+
     return true;
 }
         `,
@@ -69,6 +71,8 @@ bool TestClass::MapObject(bz_ApiString object, bz_CustomMapObjectInfo* data)
             continue;
         }
     }
+
+    // @TODO Save your custom map objects to your class
 
     return true;
 }
@@ -202,6 +206,8 @@ bool TestClass::MapObject(bz_ApiString object, bz_CustomMapObjectInfo* data)
         }
     }
 
+    // @TODO Save your custom map objects to your class
+
     return true;
 }
         `,
@@ -271,6 +277,8 @@ bool TestClass::MapObject(bz_ApiString object, bz_CustomMapObjectInfo* data)
         }
     }
 
+    // @TODO Save your custom map objects to your class
+
     return true;
 }
         `,
@@ -339,6 +347,8 @@ bool TestClass::MapObject(bz_ApiString object, bz_CustomMapObjectInfo* data)
             }
         }
     }
+
+    // @TODO Save your custom map objects to your class
 
     return true;
 }
