@@ -16,11 +16,9 @@ import { IMapObject, IMapPropertyArgument, MapArgumentType } from '../IMapObject
 
 export default class MapObjectChunk extends ChunkWriter {
     static readonly propertyBlacklist = [
-        'position|pos',
         'position',
         'pos',
         'size',
-        'rotation|rot',
         'rotation',
         'rot',
         'height',
@@ -141,14 +139,23 @@ export default class MapObjectChunk extends ChunkWriter {
                 continue;
             }
 
+            if (!mapProperty.name.trim()) {
+                continue;
+            }
+
             const isFlagProp = mapProperty.arguments.length === 0;
 
             if (isFlagProp) {
-                const cppVar = MapObjectChunk.createCppVarFromArgument(mapProperty.name);
+                const propertyNames = mapProperty.name.split('|');
+                const cppVar = MapObjectChunk.createCppVarFromArgument(propertyNames[0]);
 
                 classObj.addVariable(cppVar, CPPVisibility.Public);
 
-                simpleProperties.defineCondition(`${normLine} == "${mapProperty.name.toUpperCase()}"`, [
+                const condition = this.buildPropertyKeyAliases(propertyNames, (property: string) => (
+                    `${normLine} == "${property.toUpperCase()}"`
+                ));
+
+                simpleProperties.defineCondition(condition, [
                     new CPPWritableObject(`${insVar}.${cppVar.getVariableName()} = true;`),
                     new CPPWritableObject('continue;'),
                 ]);
@@ -167,7 +174,12 @@ export default class MapObjectChunk extends ChunkWriter {
                 casters.push(MapObjectChunk.createCppCastForArgument(insVar, cppVar, j + 1, argument));
             }
 
-            complexProperties.defineCondition(`key == "${mapProperty.name.toUpperCase()}"`, casters);
+            const propertyNames = mapProperty.name.split('|');
+            const condition = this.buildPropertyKeyAliases(propertyNames, (property: string) => (
+                `key == "${property.toUpperCase()}"`
+            ));
+
+            complexProperties.defineCondition(condition, casters);
         }
 
         if (Object.keys(simpleProperties.conditions).length > 0) {
@@ -197,6 +209,26 @@ export default class MapObjectChunk extends ChunkWriter {
 
         body.push(CPPHelper.createEmptyLine());
         body.push(propertyLoop);
+    }
+
+    private buildPropertyKeyAliases(propertyNames: string[], template: (property: string) => string): string {
+        const conditions: string[] = [];
+
+        for (let i = 0; i < propertyNames.length; i++) {
+            const propertyName = propertyNames[i];
+
+            if (MapObjectChunk.propertyBlacklist.indexOf(propertyName) >= 0) {
+                continue;
+            }
+
+            conditions.push(template(propertyName));
+        }
+
+        if (conditions.length > 1) {
+            return `(${conditions.join(') || (')})`;
+        }
+
+        return conditions[0];
     }
 
     /**
