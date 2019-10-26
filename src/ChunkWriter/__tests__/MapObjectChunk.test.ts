@@ -33,6 +33,46 @@ bool TestClass::MapObject(bz_ApiString object, bz_CustomMapObjectInfo* data)
         `,
     },
     {
+        desc: 'register default attribute registration',
+        setup: (def: PluginBuilder) => {
+            def.addMapObject({
+                uuid: '',
+                name: 'jail',
+                properties: [],
+            });
+            def.addMapObject({
+                uuid: '',
+                name: 'spawn',
+                properties: [],
+            });
+        },
+        expected: `
+bool TestClass::MapObject(bz_ApiString object, bz_CustomMapObjectInfo* data)
+{
+    // Note, this value will be in uppercase
+    if (!data || object != "JAIL" || object != "SPAWN")
+    {
+        return false;
+    }
+
+    if (object == "JAIL")
+    {
+        JailZone jailZone;
+        jailZone.handleDefaultOptions(data);
+    }
+    else if (object == "SPAWN")
+    {
+        SpawnZone spawnZone;
+        spawnZone.handleDefaultOptions(data);
+    }
+
+    // @TODO Save your custom map objects to your class
+
+    return true;
+}
+        `,
+    },
+    {
         desc: 'Add boolean map properties as boolean class attributes',
         setup: (def: PluginBuilder) => {
             def.addMapObject({
@@ -353,7 +393,68 @@ bool TestClass::MapObject(bz_ApiString object, bz_CustomMapObjectInfo* data)
     return true;
 }
         `,
+    },{
+        desc: 'Skip blacklisted or empty property names',
+        setup: (def: PluginBuilder) => {
+            def.addMapObject({
+                uuid: '',
+                name: 'ahod',
+                properties: [
+                    {
+                        uuid: '',
+                        name: 'position',
+                        readonly: false,
+                        arguments: [
+                            {
+                                uuid: '',
+                                name: 'x',
+                                type: MapArgumentType.Double,
+                            },
+                            {
+                                uuid: '',
+                                name: 'y',
+                                type: MapArgumentType.Double,
+                            },
+                            {
+                                uuid: '',
+                                name: 'z',
+                                type: MapArgumentType.Double,
+                            }
+                        ],
+                    },
+                    {
+                        uuid: '',
+                        name: 'rotation|rot',
+                        readonly: false,
+                        arguments: [],
+                    },
+                    {
+                        uuid: '',
+                        name: ' ',
+                        readonly: false,
+                        arguments: [],
+                    },
+                ],
+            });
+        },
+        expected: `
+bool TestClass::MapObject(bz_ApiString object, bz_CustomMapObjectInfo* data)
+{
+    // Note, this value will be in uppercase
+    if (!data || object != "AHOD")
+    {
+        return false;
     }
+
+    AhodZone ahodZone;
+    ahodZone.handleDefaultOptions(data);
+
+    // @TODO Save your custom map objects to your class
+
+    return true;
+}
+        `,
+    },
 ];
 
 ITestCodeDefinitionRepeater((c, d) => new MapObjectChunk(c, d), tests);

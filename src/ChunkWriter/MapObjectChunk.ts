@@ -126,6 +126,7 @@ export default class MapObjectChunk extends ChunkWriter {
 
         const normLine = `normalizedLine`;
         const rawLine = `line`;
+        let hasPropertiesToParse = false;
 
         const propertyLoop = new CPPCodeBlock('for (unsigned int i = 0; i < data->data.size(); i++)', [
             new CPPVariable('std::string', rawLine, 'data->data.get(i)'),
@@ -136,10 +137,6 @@ export default class MapObjectChunk extends ChunkWriter {
 
         for (let i = 0; i < mapObject.properties.length; i++) {
             const mapProperty = mapObject.properties[i];
-
-            if (MapObjectChunk.propertyBlacklist.indexOf(mapProperty.name) >= 0) {
-                continue;
-            }
 
             if (!mapProperty.name.trim()) {
                 continue;
@@ -156,6 +153,10 @@ export default class MapObjectChunk extends ChunkWriter {
                 const condition = this.buildPropertyKeyAliases(propertyNames, (property: string) => (
                     `${normLine} == "${property.toUpperCase()}"`
                 ));
+
+                if (condition === null) {
+                    continue;
+                }
 
                 simpleProperties.defineCondition(condition, [
                     new CPPWritableObject(`${insVar}.${cppVar.getVariableName()} = true;`),
@@ -181,16 +182,24 @@ export default class MapObjectChunk extends ChunkWriter {
                 `key == "${property.toUpperCase()}"`
             ));
 
+            if (condition === null) {
+                continue;
+            }
+
             complexProperties.defineCondition(condition, casters);
         }
 
         if (Object.keys(simpleProperties.conditions).length > 0) {
+            hasPropertiesToParse = true;
+
             propertyLoop.body.push(new CPPVariable('std::string', normLine, `bz_toupper(${rawLine})`));
             propertyLoop.body.push(CPPHelper.createEmptyLine());
             propertyLoop.body.push(simpleProperties);
         }
 
         if (Object.keys(complexProperties.conditions).length > 0) {
+            hasPropertiesToParse = true;
+
             const complexProperty = new CPPIfBlock();
             complexProperty.defineCondition('nubs.size() > 0', [
                 new CPPVariable('std::string', 'key', 'bz_toupper(nubs.get(0).c_str())'),
@@ -209,11 +218,15 @@ export default class MapObjectChunk extends ChunkWriter {
             );
         }
 
+        if (!hasPropertiesToParse) {
+            return;
+        }
+
         body.push(CPPHelper.createEmptyLine());
         body.push(propertyLoop);
     }
 
-    private buildPropertyKeyAliases(propertyNames: string[], template: (property: string) => string): string {
+    private buildPropertyKeyAliases(propertyNames: string[], template: (property: string) => string): string | null {
         const conditions: string[] = [];
 
         for (let i = 0; i < propertyNames.length; i++) {
@@ -229,8 +242,11 @@ export default class MapObjectChunk extends ChunkWriter {
         if (conditions.length > 1) {
             return `(${conditions.join(') || (')})`;
         }
+        else if (conditions.length == 1) {
+            return conditions[0];
+        }
 
-        return conditions[0];
+        return null;
     }
 
     /**
