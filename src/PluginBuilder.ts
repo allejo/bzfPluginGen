@@ -47,6 +47,8 @@ export default class PluginBuilder {
     }
 
     addSlashCommand(command: ISlashCommand) {
+        PluginBuilder.normalizeSlashCommand(command);
+
         this.definition.slashCommands[command.name] = command;
     }
 
@@ -63,6 +65,8 @@ export default class PluginBuilder {
     }
 
     addMapObject(mapObject: IMapObject) {
+        PluginBuilder.normalizeMapObject(mapObject);
+
         this.definition.mapObjects[mapObject.name] = mapObject;
     }
 
@@ -71,6 +75,8 @@ export default class PluginBuilder {
     }
 
     addFlag(flag: IFlag) {
+        PluginBuilder.normalizeFlag(flag);
+
         this.definition.flags[flag.abbreviation] = flag;
     }
 
@@ -79,6 +85,8 @@ export default class PluginBuilder {
     }
 
     addBZDBSetting(bzdbSetting: IBZDBSetting) {
+        PluginBuilder.normalizeBZDBSetting(bzdbSetting);
+
         this.definition.bzdbSettings[bzdbSetting.name] = bzdbSetting;
     }
 
@@ -87,6 +95,8 @@ export default class PluginBuilder {
     }
 
     addPollType(pollType: IPollType) {
+        PluginBuilder.normalizePollType(pollType);
+
         this.definition.pollTypes[pollType.name] = pollType;
     }
 
@@ -110,5 +120,27 @@ export default class PluginBuilder {
         }
 
         delete this.definition[namespace][targetToRemove];
+    }
+
+    public static normalizeSlashCommand(value: ISlashCommand): void {
+        value.name = value.name.toLowerCase().replace(/[^a-z0-9]/, '');
+    }
+
+    public static normalizeMapObject(value: IMapObject): void {
+        value.name = value.name.toLowerCase().replace(/[^a-z0-9]/, '');
+    }
+
+    public static normalizeFlag(value: IFlag): void {
+        value.name = value.name.substring(0, 32);
+        value.abbreviation = value.abbreviation.toUpperCase().substring(0, 2);
+        value.helpString = value.helpString.substring(0, 128);
+    }
+
+    public static normalizeBZDBSetting(value: IBZDBSetting): void {
+        value.name = '_' + value.name.replace(/[^a-zA-Z0-9]/, '');
+    }
+
+    public static normalizePollType(value: IPollType): void {
+        value.name = value.name.toLowerCase().replace(/[^a-z0-9]/, '');
     }
 }

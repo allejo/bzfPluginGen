@@ -109,10 +109,10 @@ void TestClass::Init(const char* config)
         expected: `
 void TestClass::Init(const char* config)
 {
-    bz_registerCustomBZDBBool("myBool", false, 0, false);
-    bz_registerCustomBZDBString("myString", "Sky Blue", 0, false);
-    bz_registerCustomBZDBDouble("myDouble", 0.5, 0, false);
-    bz_registerCustomBZDBInt("myInt", 5, 0, false);
+    bz_registerCustomBZDBBool("_myBool", false, 0, false);
+    bz_registerCustomBZDBString("_myString", "Sky Blue", 0, false);
+    bz_registerCustomBZDBDouble("_myDouble", 0.5, 0, false);
+    bz_registerCustomBZDBInt("_myInt", 5, 0, false);
 }
         `,
     },
