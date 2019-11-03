@@ -1,4 +1,6 @@
+.DS_Store
 .editorconfig
+.gitattributes
 .idea/
 .prettierrc
 .travis.yml
