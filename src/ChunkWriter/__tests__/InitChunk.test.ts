@@ -86,9 +86,14 @@ void TestClass::Init(const char* config)
         desc: 'Init() should register BZDB settings with the appropriate function calls based on types and order',
         setup: (def: PluginBuilder) => {
             def.addBZDBSetting({
-                name: 'myBool',
+                name: 'myDefaultFalsyBool',
                 type: BZDBType.Bool,
                 value: false,
+            });
+            def.addBZDBSetting({
+                name: 'myDefaultTruthyBool',
+                type: BZDBType.Bool,
+                value: true,
             });
             def.addBZDBSetting({
                 name: 'myString',
@@ -109,7 +114,8 @@ void TestClass::Init(const char* config)
         expected: `
 void TestClass::Init(const char* config)
 {
-    bz_registerCustomBZDBBool("_myBool", false, 0, false);
+    bz_registerCustomBZDBBool("_myDefaultFalsyBool", false, 0, false);
+    bz_registerCustomBZDBBool("_myDefaultTruthyBool", true, 0, false);
     bz_registerCustomBZDBString("_myString", "Sky Blue", 0, false);
     bz_registerCustomBZDBDouble("_myDouble", 0.5, 0, false);
     bz_registerCustomBZDBInt("_myInt", 5, 0, false);

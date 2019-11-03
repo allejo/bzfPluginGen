@@ -67,7 +67,7 @@ export default class InitChunk extends ChunkWriter {
                 if (object.type === BZDBType.String) {
                     defaultValue = `"${defaultValue}"`;
                 } else if (object.type === BZDBType.Bool) {
-                    defaultValue = object.type ? 'true' : 'false';
+                    defaultValue = object.value ? 'true' : 'false';
                 } else {
                     defaultValue = `${+object.value}`;
                 }
