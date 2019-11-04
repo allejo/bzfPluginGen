@@ -30,6 +30,8 @@ export default class MapObjectChunk extends ChunkWriter {
             return;
         }
 
+        pluginClass.addExtends([CPPVisibility.Public, 'bz_CustomMapObjectHandler']);
+
         this.fxn = new CPPFunction('bool', 'MapObject', [
             new CPPVariable('bz_ApiString', 'object'),
             new CPPVariable('bz_CustomMapObjectInfo*', 'data'),
