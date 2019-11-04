@@ -162,6 +162,20 @@ void TestClass::Init(const char* config)
 }
         `,
     },
+    {
+        desc: 'Init() should register custom poll types',
+        setup: (def: PluginBuilder) => {
+            def.addPollType({
+                name: 'mapchange',
+            });
+        },
+        expected: `
+void TestClass::Init(const char* config)
+{
+    bz_registerCustomPollType("mapchange", this);
+}
+        `,
+    },
 ];
 
 ITestCodeDefinitionRepeater((c, d) => new InitChunk(c, d), tests);

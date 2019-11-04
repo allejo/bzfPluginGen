@@ -6,6 +6,7 @@ import { IEvent } from '../IEvent';
 import { IFlag } from '../IFlag';
 import { IMapObject } from '../IMapObject';
 import IPlugin from '../IPlugin';
+import { IPollType } from '../IPollType';
 import { ISlashCommand } from '../ISlashCommand';
 
 export default class InitChunk extends ChunkWriter {
@@ -26,6 +27,7 @@ export default class InitChunk extends ChunkWriter {
         this.buildBZDBSettingRegistration(fxnBody);
         this.buildFlagRegistration(fxnBody);
         this.buildMapObjectRegistration(fxnBody);
+        this.buildPollTypeRegistration(fxnBody);
 
         this.fxn.implementFunction(fxnBody);
     }
@@ -98,6 +100,15 @@ export default class InitChunk extends ChunkWriter {
             'mapObjects',
             'bz_registerCustomMapObject',
             (object: IMapObject) => [`"${object.name.toUpperCase()}"`, 'this'],
+            body
+        );
+    }
+
+    private buildPollTypeRegistration(body: CPPWritable[]): void {
+        this.registerFunctionRepeater(
+            'pollTypes',
+            'bz_registerCustomPollType',
+            (object: IPollType) => [`"${object.name}"`, 'this'],
             body
         );
     }
