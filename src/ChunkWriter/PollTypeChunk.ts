@@ -61,6 +61,7 @@ export default class PollTypeChunk extends ChunkWriter {
 
     private buildPollOpen(body: CPPWritable[]): void {
         body.push(new CPPVariable('std::string', 'action', '_action'));
+        body.push(new CPPVariable('std::string', 'parameters', '_parameters'));
         body.push(CPPHelper.createEmptyLine());
 
         const ifBlock = new CPPIfBlock();
