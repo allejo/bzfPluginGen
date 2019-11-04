@@ -108,7 +108,16 @@ export default class InitChunk extends ChunkWriter {
         this.registerFunctionRepeater(
             'pollTypes',
             'bz_registerCustomPollType',
-            (object: IPollType) => [`"${object.name}"`, 'this'],
+            (object: IPollType) => {
+                let params = '';
+
+                // @todo Remove this check in 2.0.0 since `parameters` will be mandatory in 2.0.0
+                if (object.parameters) {
+                    params = object.parameters.join(' ');
+                }
+
+                return [`"${object.name}"`, `"${params}"`, 'this'];
+            },
             body
         );
     }

@@ -167,12 +167,13 @@ void TestClass::Init(const char* config)
         setup: (def: PluginBuilder) => {
             def.addPollType({
                 name: 'mapchange',
+                parameters: ['mapname']
             });
         },
         expected: `
 void TestClass::Init(const char* config)
 {
-    bz_registerCustomPollType("mapchange", this);
+    bz_registerCustomPollType("mapchange", "mapname", this);
 }
         `,
     },
