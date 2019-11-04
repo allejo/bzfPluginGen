@@ -41,10 +41,15 @@ export const ITestCodeDefinitionRepeater = (
             const chunk = chunkType(pluginClass, pluginDef.definition);
             chunk.process();
 
-            const method = pluginClass.getMethods()[chunk.getIdentifier()];
-            const output = method.functionDef.write(codeStyle, 0);
+            const methods = pluginClass.getMethods();
+            const output: string[] = [];
 
-            expect(output).toEqual(multiLineString(testDef.expected));
+            chunk.getIdentifiers().forEach((value: string) => {
+                const method = methods[value];
+                output.push(method.functionDef.write(codeStyle, 0));
+            });
+
+            expect(output.join('\n\n')).toEqual(multiLineString(testDef.expected));
         });
     }
 };

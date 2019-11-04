@@ -7,6 +7,7 @@ import IPlugin from './IPlugin';
 import InitChunk from './ChunkWriter/InitChunk';
 import MapObjectChunk from './ChunkWriter/MapObjectChunk';
 import NameChunk from './ChunkWriter/NameChunk';
+import PollTypeChunk from './ChunkWriter/PollTypeChunk';
 import SlashCommandChunk from './ChunkWriter/SlashCommandChunk';
 
 export default class PluginWriter {
@@ -23,6 +24,7 @@ export default class PluginWriter {
         this.handleEvents();
         this.handleSlashCommands();
         this.handleMapObjects();
+        this.handlePollTypes();
     }
 
     getClassName(): string {
@@ -76,5 +78,10 @@ export default class PluginWriter {
     private handleMapObjects() {
         const mapObjectChunk = new MapObjectChunk(this.pluginClass, this.plugin);
         mapObjectChunk.process();
+    }
+
+    private handlePollTypes() {
+        const pollTypeChunk = new PollTypeChunk(this.pluginClass, this.plugin);
+        pollTypeChunk.process();
     }
 }
