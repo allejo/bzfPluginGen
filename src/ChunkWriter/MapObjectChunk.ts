@@ -138,9 +138,15 @@ export default class MapObjectChunk extends ChunkWriter {
             }
 
             const isFlagProp = mapProperty.arguments.length === 0;
+            const propertyNames = mapProperty.name.split('|');
 
+            // If we're hitting a blacklisted property, then just move on to the next one
+            if (MapObjectChunk.propertyBlacklist.indexOf(propertyNames[0]) >= 0) {
+                continue;
+            }
+
+            // A flag property is one that as no arguments and either exists or doesn't; a boolean value
             if (isFlagProp) {
-                const propertyNames = mapProperty.name.split('|');
                 const cppVar = MapObjectChunk.createCppVarFromArgument(propertyNames[0]);
 
                 classObj.addVariable(cppVar, CPPVisibility.Public);
@@ -173,7 +179,6 @@ export default class MapObjectChunk extends ChunkWriter {
                 casters.push(MapObjectChunk.createCppCastForArgument(insVar, cppVar, j + 1, argument));
             }
 
-            const propertyNames = mapProperty.name.split('|');
             const condition = this.buildPropertyKeyAliases(
                 propertyNames,
                 (property: string) => `key == "${property.toUpperCase()}"`
@@ -230,6 +235,10 @@ export default class MapObjectChunk extends ChunkWriter {
             const propertyName = propertyNames[i];
 
             if (MapObjectChunk.propertyBlacklist.indexOf(propertyName) >= 0) {
+                continue;
+            }
+
+            if (propertyName.trim().length === 0) {
                 continue;
             }
 

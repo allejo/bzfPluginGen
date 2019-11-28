@@ -349,6 +349,12 @@ bool TestClass::MapObject(bz_ApiString object, bz_CustomMapObjectInfo* data)
                         readonly: false,
                         arguments: [],
                     },
+                    {
+                        uuid: '',
+                        name: 'teamonly|to|',
+                        readonly: false,
+                        arguments: [],
+                    },
                 ],
             });
         },
@@ -372,6 +378,11 @@ bool TestClass::MapObject(bz_ApiString object, bz_CustomMapObjectInfo* data)
         if ((normalizedLine == "ROGUEONLY") || (normalizedLine == "RO"))
         {
             ahodZone.rogueonly = true;
+            continue;
+        }
+        else if ((normalizedLine == "TEAMONLY") || (normalizedLine == "TO"))
+        {
+            ahodZone.teamonly = true;
             continue;
         }
 
