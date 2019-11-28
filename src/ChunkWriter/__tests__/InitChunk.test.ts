@@ -167,7 +167,7 @@ void TestClass::Init(const char* config)
         setup: (def: PluginBuilder) => {
             def.addPollType({
                 name: 'mapchange',
-                parameters: ['mapname']
+                parameters: ['mapname'],
             });
         },
         expected: `
