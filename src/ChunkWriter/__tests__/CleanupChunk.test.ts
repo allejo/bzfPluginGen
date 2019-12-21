@@ -50,7 +50,7 @@ void TestClass::Cleanup()
 {
     Flush();
 
-    bz_removeCustomMapObject("customzone");
+    bz_removeCustomMapObject("CUSTOMZONE");
 }
         `,
     },
@@ -73,7 +73,7 @@ void TestClass::Cleanup()
 
     bz_removeCustomSlashCommand("command");
 
-    bz_removeCustomMapObject("customzone");
+    bz_removeCustomMapObject("CUSTOMZONE");
 }
         `,
     },
@@ -104,7 +104,7 @@ void TestClass::Cleanup()
 
     bz_removeCustomSlashCommand("command");
 
-    bz_removeCustomMapObject("customzone");
+    bz_removeCustomMapObject("CUSTOMZONE");
 
     bz_removeCustomBZDBVariable("_setting");
 

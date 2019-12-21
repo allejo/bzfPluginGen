@@ -40,7 +40,7 @@ export default class CleanupChunk extends ChunkWriter {
         this.unregisterFunctionRepeater(
             'mapObjects',
             'bz_removeCustomMapObject',
-            (object: IMapObject): string[] => [`"${object.name}"`],
+            (object: IMapObject): string[] => [`"${object.name.toUpperCase()}"`],
             body
         );
     }
