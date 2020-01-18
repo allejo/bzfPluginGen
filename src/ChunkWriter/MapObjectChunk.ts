@@ -61,7 +61,7 @@ export default class MapObjectChunk extends ChunkWriter {
     private buildShortCircuit(body: CPPWritable[]): void {
         body.push(new CPPComment('Note, this value will be in uppercase', false));
 
-        const conditions: string[] = ['!data'];
+        const conditions: string[] = [];
 
         for (const name in this.pluginDefinition.mapObjects) {
             const mapObject = this.pluginDefinition.mapObjects[name];
@@ -70,7 +70,10 @@ export default class MapObjectChunk extends ChunkWriter {
         }
 
         const shortCircuit = new CPPIfBlock();
-        shortCircuit.defineCondition(conditions.join(' || '), [new CPPWritableObject('return false;')]);
+        shortCircuit.defineCondition(
+            conditions.length >= 2 ? `!data || (${conditions.join(' && ')})` : `!data || ${conditions.toString()}`,
+            [new CPPWritableObject('return false;')]
+        );
 
         body.push(shortCircuit);
         body.push(CPPHelper.createEmptyLine());

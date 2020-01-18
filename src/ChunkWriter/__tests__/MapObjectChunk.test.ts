@@ -51,7 +51,7 @@ bool TestClass::MapObject(bz_ApiString object, bz_CustomMapObjectInfo* data)
 bool TestClass::MapObject(bz_ApiString object, bz_CustomMapObjectInfo* data)
 {
     // Note, this value will be in uppercase
-    if (!data || object != "JAIL" || object != "SPAWN")
+    if (!data || (object != "JAIL" && object != "SPAWN"))
     {
         return false;
     }
