@@ -26,6 +26,7 @@ export default class PluginBuilder {
                 showDocBlocks: true,
                 showComments: true,
             },
+            makesUrlCalls: false,
             events: {},
             slashCommands: {},
             callbacks: {},
