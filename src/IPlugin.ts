@@ -75,6 +75,11 @@ export default interface IPlugin {
     codeStyle: ICodeStyle;
 
     /**
+     * This plugin makes URL calls and requires the plugin to extend `bz_BaseURLHandler`.
+     */
+    makesUrlCalls: boolean;
+
+    /**
      * The events that this plug-in will be listening to.
      */
     events: {

@@ -10,6 +10,7 @@ import MapObjectChunk from './ChunkWriter/MapObjectChunk';
 import NameChunk from './ChunkWriter/NameChunk';
 import PollTypeChunk from './ChunkWriter/PollTypeChunk';
 import SlashCommandChunk from './ChunkWriter/SlashCommandChunk';
+import UrlHandlerChunk from './ChunkWriter/UrlHandlerChunk';
 
 /**
  * @since 1.0.0
@@ -28,6 +29,7 @@ export default class PluginWriter {
             new CleanupChunk(this.pluginClass, this.plugin),
             new CallbackChunk(this.pluginClass, this.plugin),
             new EventChunk(this.pluginClass, this.plugin),
+            new UrlHandlerChunk(this.pluginClass, this.plugin),
             new SlashCommandChunk(this.pluginClass, this.plugin),
             new MapObjectChunk(this.pluginClass, this.plugin),
             new PollTypeChunk(this.pluginClass, this.plugin),
