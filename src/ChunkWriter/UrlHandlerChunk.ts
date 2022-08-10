@@ -70,7 +70,7 @@ export default class UrlHandlerChunk extends ChunkWriter {
         }
 
         this.urlDoneFxn.implementFunction([
-            CPPVariable.createString('webData', new CPPWritableObject('(const char*)data')),
+            CPPVariable.createString('result', new CPPWritableObject('(const char*)data')),
             CPPHelper.createEmptyLine(),
             new CPPIfBlock().defineCondition('!complete', [new CPPWritableObject('return;')]),
             CPPHelper.createEmptyLine(),

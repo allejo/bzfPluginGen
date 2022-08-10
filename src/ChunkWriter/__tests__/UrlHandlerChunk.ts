@@ -12,7 +12,7 @@ const tests: ITestCodeDefinition[] = [
         expected: `
 void TestClass::URLDone(const char* URL, const void* data, unsigned int size, bool complete)
 {
-    std::string webData = (const char*)data;
+    std::string result = (const char*)data;
 
     if (!complete)
     {
