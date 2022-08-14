@@ -1,6 +1,6 @@
 {
   "name": "@allejo/bzf-plugin-gen",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "The core logic for generating C++ plug-in source from JSON",
   "main": "dist/index.js",
   "scripts": {

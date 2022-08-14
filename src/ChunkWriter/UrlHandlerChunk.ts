@@ -19,7 +19,7 @@ export default class UrlHandlerChunk extends ChunkWriter {
             return;
         }
 
-        pluginClass.addExtends([CPPVisibility.Public, 'bz_BaseURLHandler']);
+        pluginClass.addExtends([CPPVisibility.Public, 'bz_URLHandler_V2']);
 
         const urlDoneFxn = new CPPFunction('void', 'URLDone', [
             new CPPVariable('const char*', 'URL'),
