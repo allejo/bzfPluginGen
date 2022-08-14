@@ -1,3 +1,5 @@
+import IPlugin from '../IPlugin';
+import { ChunkWriter } from './ChunkWriter';
 import {
     CPPClass,
     CPPComment,
@@ -8,9 +10,6 @@ import {
     CPPVisibility,
     CPPWritableObject,
 } from 'aclovis';
-
-import { ChunkWriter } from './ChunkWriter';
-import IPlugin from '../IPlugin';
 
 export default class UrlHandlerChunk extends ChunkWriter {
     constructor(pluginClass: CPPClass, private readonly pluginDefinition: IPlugin) {
@@ -28,12 +27,14 @@ export default class UrlHandlerChunk extends ChunkWriter {
             new CPPVariable('unsigned int', 'size'),
             new CPPVariable('bool', 'complete'),
         ]);
+        urlDoneFxn.setVirtual(true);
         urlDoneFxn.setParentClass(pluginClass, CPPVisibility.Public);
 
         const urlTimeoutFxn = new CPPFunction('void', 'URLTimeout', [
             new CPPVariable('const char*', 'URL'),
             new CPPVariable('int', 'errorCode'),
         ]);
+        urlTimeoutFxn.setVirtual(true);
         urlTimeoutFxn.setParentClass(pluginClass, CPPVisibility.Public);
 
         const urlErrorFxn = new CPPFunction('void', 'URLError', [
@@ -41,6 +42,7 @@ export default class UrlHandlerChunk extends ChunkWriter {
             new CPPVariable('int', 'errorCode'),
             new CPPVariable('const char*', 'errorString'),
         ]);
+        urlErrorFxn.setVirtual(true);
         urlErrorFxn.setParentClass(pluginClass, CPPVisibility.Public);
 
         this.functions.push(urlDoneFxn);
